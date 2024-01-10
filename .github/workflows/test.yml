@@ -1,0 +1,57 @@
+name: "Ruby on Rails CI"
+
+on: [push]
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      RAILS_ENV: test
+      POSTGRES_DB: nomishiro_bancho_test
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: password
+      DATABASE_HOST: 127.0.0.1
+    services:
+      db:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+          POSTGRES_USER: ${{ env.DATABASE_USERNAME }}
+          POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+          POSTGRES_HOST: ${{ env.DATABASE_HOST }}
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkuot repository
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Set up database
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:migrate
+      - name: Run rspec
+        run: bundle exec rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkuot
+        uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.2
+          bundler-cache: true
+      - name: Run rubocop
+        run: bundle exec rubocop
