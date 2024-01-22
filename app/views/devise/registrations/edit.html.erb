@@ -1,0 +1,42 @@
+<div class="container">
+  <h1>アカウント情報変更</h1>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "ユーザー名を入力" %>
+      <%= render "shared/error_messages", object: f.object, key: "name" %>
+    </div>
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレスを入力"%>
+      <%= render "shared/error_messages", object: f.object, key: "email" %>
+    </div>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+    <div class="field">
+      <%= f.label :password %> <span>(変更する場合)</span>
+      <%= "#{@minimum_password_length}文字以上" if @minimum_password_length %><br />
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "変更後パスワードを入力" %>
+      <%= render "shared/error_messages", object: f.object, key: "password" %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "変更後パスワードを入力" %>
+      <%= render "shared/error_messages", object: f.object, key: "password_confirmation" %>
+    </div>
+    <div class="field">
+      <%= f.label :current_password %><br />
+      <%= f.password_field :current_password, autocomplete: "current-password", placeholder: "現在のパスワードを入力" %>
+      <%= render "shared/error_messages", object: f.object, key: "current_password" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Update" %>
+      <%= link_to "キャンセル", :back %>
+    </div>
+  <% end %>
+  <div>
+    <h2>退会する</h2>
+    <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+  </div>
+</div>

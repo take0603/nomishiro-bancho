@@ -1,0 +1,12 @@
+<header class="container border-bottom mb-4">
+  <div>
+    <%= link_to "飲み代番長", root_path %>
+  </div>
+  <% if user_signed_in? %>
+    <%= "ログインユーザー：#{current_user.name}" %>
+    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %>
+  <% else %>
+    <%= link_to "新規登録", new_user_registration_path %>
+    <%= link_to "ログイン", new_user_session_path %>
+  <% end %>
+</header>
