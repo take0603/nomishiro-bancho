@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>イベント編集</h1>
+  <%= form_with model:@event do |f| %>
+    <div>
+      <%= f.label :event_name, "イベント名" %>
+      <%= f.text_field :event_name, placeholder: "イベント名を入力" %>
+      <%= render "shared/error_messages", object: f.object, key: "event_name" %>
+    </div>
+    <div>
+      <%= f.label :explanation, "イベントの概要" %>
+      <%= f.text_area :explanation, placeholder: "イベントの概要を入力" %>
+      <%= render "shared/error_messages", object: f.object, key: "explanation" %>
+    </div>
+    <div>
+      <% @event.schedules.each do |schedule| %>
+        <div>
+          <%= l schedule.schedule_date %>
+          <%= link_to "編集", edit_event_schedule_path(@event, schedule) %>
+        </div>
+      <% end %>
+      <%= link_to "候補日の追加", new_event_schedule_path(@event) %>
+    </div>
+    <%= f.submit "保存" %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+  <% end %>
+
+</div>

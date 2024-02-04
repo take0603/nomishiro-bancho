@@ -25,15 +25,6 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
-      reservation:
-        checkin_date: チェックイン日
-        checkout_date: チェックアウト日
-        people_num: 人数
-      room:
-        name: 施設名
-        explanation: 施設詳細
-        price: 料金
-        address: 住所
     models:
       user: ユーザー
   devise:
@@ -150,3 +141,17 @@ ja:
       not_saved:
         one: エラーが発生したため %{resource} は保存されませんでした。
         other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+  date:
+    formats:
+      default: "%Y.%m.%d"
+      long: "%Y年%m月%d日"
+      short: "%m月%d日"
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      short: "%y/%m/%d %H:%M"
+      date_long: "%Y年%m月%d日"
+      date_short: "%m月%d日"
+      datetime: "%Y.%m.%d %H時%M分"
+      only_time: "%H:%M"

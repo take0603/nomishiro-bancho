@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>出欠表</h1>
+  <div class="mt-3">
+    <table>
+      <tr>
+        <th></th>
+        <% @schedules.each do |schedule| %>
+          <th><%= l schedule.schedule_date %></th>
+        <% end %>
+      </tr>
+      <% @members.each do |member| %>
+        <tr>
+          <th><%= link_to member.member_name, edit_event_attendances_path(@event.id, member_id: member.id) %></th>
+          <% @schedules.each do |schedule| %>
+            <td><%= display_attendance_answer(member, schedule) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

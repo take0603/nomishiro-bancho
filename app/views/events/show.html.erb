@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>イベント詳細</h1>
+  <%= @event.event_name %>
+  <%= @event.explanation %>
+  <%= link_to "編集", edit_event_path(@event) %>
+  <%= link_to "削除", event_path(@event.id), data: { turbo_method: :delete, turbo_confirm: "イベントを削除しますか？" } %>
+  <% @event.schedules.each do |schedule| %>
+    <div>
+      <%= l schedule.schedule_date %>
+      <%= link_to "編集", edit_event_schedule_path(@event, schedule) %>
+    </div>
+  <% end %>
+  <div>
+    <%= link_to "候補日の追加", new_event_schedule_path(@event) %>
+  </div>
+</div>

@@ -10,9 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_19_032708) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_26_100119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "schedule_id", null: false
+    t.bigint "member_id", null: false
+    t.integer "answer", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_attendances_on_event_id"
+    t.index ["member_id"], name: "index_attendances_on_member_id"
+    t.index ["schedule_id"], name: "index_attendances_on_schedule_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "event_name", null: false
+    t.text "explanation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.string "member_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.datetime "schedule_date", null: false
+    t.boolean "is_confirmed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_schedules_on_event_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
@@ -27,4 +63,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_19_032708) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendances", "events"
+  add_foreign_key "attendances", "members"
+  add_foreign_key "attendances", "schedules"
+  add_foreign_key "events", "users"
+  add_foreign_key "schedules", "events"
 end

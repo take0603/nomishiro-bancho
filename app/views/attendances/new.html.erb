@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>出欠の入力</h1>
+  <div class="mt-3">
+    <%= form_with model: @member, url: event_attendances_path do |f| %>
+      <div>
+        <%= f.text_field :member_name %>
+        <%= render "shared/error_messages", object: f.object, key: "member_name" %>
+      </div>
+      <%= f.fields_for :attendances do |g| %>
+        <div>
+          <%= g.hidden_field :event_id, value: @event.id %>
+          <%= g.hidden_field :schedule_id, value: g.object.schedule.id %>
+          <%= l g.object.schedule.schedule_date %>
+          <%= g.radio_button :answer, "ok" %> 
+          <%= g.label :answer, "⚪︎", value: "ok" %>
+          <%= g.radio_button :answer, "maybe" %>
+          <%= g.label :answer, "△", value: "maybe" %>
+          <%= g.radio_button :answer, "ng" %>
+          <%= g.label :answer, "×", value: "ng" %>
+        </div>
+      <% end %>
+      <%= f.submit "回答" %>
+    <% end %>
+  </div>
+</div>
