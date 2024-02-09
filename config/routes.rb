@@ -2,12 +2,11 @@ Rails.application.routes.draw do
   root to: 'home#index'
   devise_for :users
   get '/users/account', to: 'users#show'
-  resources :events do 
+  resources :events do
     resources :schedules
     resource :attendances
-    resource :members
+    resources :payments
   end
-
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

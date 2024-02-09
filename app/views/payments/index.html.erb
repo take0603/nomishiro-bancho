@@ -1,0 +1,14 @@
+<div class="container">
+  <h1><%= @event.event_name %>の支払表一覧</h1>
+  <%= link_to "新規支払表の作成", new_event_payment_path %>
+  <div>
+    <% @event.payments.each do |payment| %>
+      <ul>
+        <li>
+          <%= link_to "#{payment.payment_name}", event_payment_path(params[:event_id], payment.id) %>
+          <%= link_to "削除", event_payment_path(params[:event_id], payment.id), data: { turbo_method: :delete, turbo_confirm: "支払い表を削除しますか？" } %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>

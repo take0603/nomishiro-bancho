@@ -1,0 +1,47 @@
+<script type="module">import "payment";</script>
+<div class="container">
+  <h1>支払表作成</h1>
+    <%= form_with model: @payment, url: event_payments_path do |f| %>
+      <div>
+        <%= f.label :payment_name, "支払表名目" %>
+        <%= f.text_field :payment_name, placeholder: "◯◯代金" %>
+        <%= render "shared/error_messages", object: f.object, key: "payment_name" %>
+      </div>
+      <div>
+        <%= f.label :amount, "総額" %>
+        <%= f.number_field :amount %>
+        <%= render "shared/error_messages", object: f.object, key: "amount" %>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>支払額</th>
+          </tr>
+        </thead>
+        <tbody id="payment_table">
+          <%= f.fields_for :payment_details do |detail| %>
+            <tr>
+              <td>
+                <%= detail.label :participant, "名前", class: "payment_label" %>
+                <%= detail.text_field :participant, value: detail.object.participant %>
+                <%= render "shared/error_messages", object: detail.object, key: "participant" %>
+              </td>
+              <td>
+                <%= detail.label :fee, "支払額", class: "payment_label" %>
+                <%= detail.number_field :fee %>
+                <%= render "shared/error_messages", object: detail.object, key: "fee" %>
+              </td>
+              <td class="delete">
+                <span class="deleteButton">削除</span>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div>
+        <p id="addButton">入力欄を追加</p>
+      </div>
+      <%= f.submit "保存" %>
+    <% end %>
+</div>

@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>支払表</h1>
+  <%= link_to "編集", edit_event_payment_path(params[:event_id], @payment) %>
+  <div>
+    <%= @payment.payment_name %>
+  </div>
+  <div>
+    <span>総額</span>
+    <%= @payment.amount %>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>支払額</th>
+      </tr>
+    </thead>
+    <tbody id="payment_table">
+      <% @payment.payment_details.each do |payment| %>
+        <tr>
+          <td>
+            <%= payment.participant %>
+          </td>
+          <td>
+            <%= payment.fee %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

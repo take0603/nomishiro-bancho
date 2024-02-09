@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_26_100119) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_04_114126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_100119) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payment_details", force: :cascade do |t|
+    t.bigint "payment_id"
+    t.string "participant", null: false
+    t.integer "fee", default: 0
+    t.boolean "is_paid", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payment_id"], name: "index_payment_details_on_payment_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.bigint "event_id"
+    t.string "payment_name", null: false
+    t.integer "amount", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_payments_on_event_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.datetime "schedule_date", null: false
@@ -67,5 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_26_100119) do
   add_foreign_key "attendances", "members"
   add_foreign_key "attendances", "schedules"
   add_foreign_key "events", "users"
+  add_foreign_key "payment_details", "payments"
+  add_foreign_key "payments", "events"
   add_foreign_key "schedules", "events"
 end
