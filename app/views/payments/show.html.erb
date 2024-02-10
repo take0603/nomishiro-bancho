@@ -13,6 +13,7 @@
       <tr>
         <th>名前</th>
         <th>支払額</th>
+        <th>支払済</th>
       </tr>
     </thead>
     <tbody id="payment_table">
@@ -23,6 +24,9 @@
           </td>
           <td>
             <%= payment.fee %>
+          </td>
+          <td>
+            <%= "◯" if payment.is_paid %>
           </td>
         </tr>
       <% end %>

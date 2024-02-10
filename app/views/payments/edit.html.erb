@@ -32,6 +32,7 @@
             <th>名前</th>
             <th>傾斜割合</th>
             <th>支払額</th>
+            <th>支払済</th>
           </tr>
         </thead>
         <tbody id="payment_table">
@@ -59,6 +60,11 @@
                 <%= detail.label :fee, "支払額", class: "payment_label" %>
                 <%= detail.number_field :fee, class: "payment_fee_form" %>
                 <%= render "shared/error_messages", object: detail.object, key: "fee" %>
+              </td>
+              <td>
+                <%= detail.label :is_paid, "支払済", class: "payment_label" %>
+                <%= detail.check_box :is_paid %>
+                <%= render "shared/error_messages", object: detail.object, key: "is_paid" %>
               </td>
               <td class="delete">
                 <span class="deleteButton">削除</span>

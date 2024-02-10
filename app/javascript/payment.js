@@ -9,6 +9,7 @@ addButton.addEventListener('click', function() {
   const cell_participant = row.insertCell(-1);
   const cell_ratio = row.insertCell(-1);
   const cell_fee = row.insertCell(-1);
+  const cell_isPaid = row.insertCell(-1);
   const cell_delete = row.insertCell(-1);
 
   let nameForm = `
@@ -33,10 +34,15 @@ addButton.addEventListener('click', function() {
     <input class=payment_fee_form type=number value=0
     name=payment[payment_details_attributes][${i}][fee]
     id=payment_payment_details_attributes_${i}_fee>`;
+  let isPaid = `
+    <label class=payment_label for=payment_payment_details_attributes_${i}_is_paid>支払済</label>
+    <input name=payment[payment_details_attributes][${i}][is_paid] type=hidden value=0 autocomplete=off>
+    <input type=checkbox value=1 name=payment[payment_details_attributes][${i}][is_paid] id=payment_payment_details_attributes_${i}_is_paid>`
   let deleteButton = `<span class="deleteButton">削除</span>`;
   cell_participant.innerHTML = nameForm;
   cell_ratio.innerHTML = ratioForm;
   cell_fee.innerHTML = feeForm;
+  cell_isPaid.innerHTML = isPaid;
   cell_delete.innerHTML = deleteButton;
 
   addDeleteEvent();
