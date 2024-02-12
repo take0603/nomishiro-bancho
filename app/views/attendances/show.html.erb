@@ -10,7 +10,7 @@
       </tr>
       <% @members.each do |member| %>
         <tr>
-          <th><%= link_to member.member_name, edit_event_attendances_path(@event.id, member_id: member.id) %></th>
+          <th><%= link_to member.member_name, edit_event_attendances_path(@event, member_id: member.id) %></th>
           <% @schedules.each do |schedule| %>
             <td><%= display_attendance_answer(member, schedule) %></td>
           <% end %>

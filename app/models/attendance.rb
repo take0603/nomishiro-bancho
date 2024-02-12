@@ -5,7 +5,6 @@ class Attendance < ApplicationRecord
 
   validates :event_id, presence: true
   validates :schedule_id, presence: true
-  validates :member_id, presence: true
 
   enum answer: { unanswered: 0, ok: 1, maybe: 2, ng: 3 }
 

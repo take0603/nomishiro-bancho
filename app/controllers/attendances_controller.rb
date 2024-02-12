@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   def new
-    @event = Event.find(params[:event_id])
+    @event = Event.find_by_hashid!(params[:event_id])
     @member = Member.new
     schedules = @event.schedules.order(:schedule_date)
     schedules.map { |schedule| @member.attendances.build(schedule_id: schedule.id) }
@@ -12,19 +12,19 @@ class AttendancesController < ApplicationController
       flash[:notice] = "出欠を回答しました。"
       redirect_to event_attendances_path
     else
-      @event = Event.find(params[:event_id])
+      @event = Event.find_by_hashid!(params[:event_id])
       render :new, status: :unprocessable_entity
     end
   end
 
   def show
-    @event = Event.find(params[:event_id])
+    @event = Event.find_by_hashid!(params[:event_id])
     @members = @event.members.distinct.order(:id)
     @schedules = @event.schedules.order(:schedule_date)
   end
 
   def edit
-    @event = Event.find(params[:event_id])
+    @event = Event.find_by_hashid!(params[:event_id])
     @member = Member.find(params[:member_id])
     @attendance = Attendance.joins(:schedule).where(member_id: @member.id).order(:schedule_date)
   end
@@ -35,7 +35,7 @@ class AttendancesController < ApplicationController
       flash[:notice] = "出欠を回答しました。"
       redirect_to event_attendances_path
     else
-      @event = Event.find(params[:event_id])
+      @event = Event.find_by_hashid!(params[:event_id])
       render :edit, status: :unprocessable_entity
     end
   end
