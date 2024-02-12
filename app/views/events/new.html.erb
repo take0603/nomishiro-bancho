@@ -1,3 +1,4 @@
+<script type="module">import "event";</script>
 <div class="container">
   <h1>イベント作成</h1>
   <%= form_with model: @event, url: events_path do |f| %>
@@ -10,6 +11,40 @@
       <%= f.label :explanation, "イベントの概要" %>
       <%= f.text_area :explanation, placeholder: "イベントの概要を入力" %>
       <%= render "shared/error_messages", object: f.object, key: "explanation" %>
+    </div>
+    <div>
+      <%= f.label :date, "開催日（確定）" %>
+      <%= f.datetime_field :date %>
+      <%= render "shared/error_messages", object: f.object, key: "date" %>
+    </div>
+    <div>
+      <%= f.label :deadline, "回答期限" %>
+      <%= f.date_field :deadline %>
+      <%= render "shared/error_messages", object: f.object, key: "deadline" %>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>候補日</th>
+          <th>日程確定</th>
+        </tr>
+      </thead>
+      <tbody id="schedule_table">
+        <%= f.fields_for :schedules do |schedule| %>
+          <tr class="schedule_row">
+            <td>
+              <%= schedule.datetime_field :schedule_date %>
+              <%= render "shared/error_messages", object: schedule.object, key: "schedule_date" %>
+            </td>
+            <td>
+              <span class="deleteScheduleForm">削除</span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div>
+      <span id="addScheduleForm">候補日入力欄を追加</span>
     </div>
     <%= f.submit "保存" %>
   <% end %>

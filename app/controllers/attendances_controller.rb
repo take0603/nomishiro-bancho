@@ -36,6 +36,7 @@ class AttendancesController < ApplicationController
       redirect_to event_attendances_path
     else
       @event = Event.find_by_hashid!(params[:event_id])
+      @attendance = Attendance.joins(:schedule).where(member_id: @member.id).order(:schedule_date)
       render :edit, status: :unprocessable_entity
     end
   end

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  root to: 'home#top'
+  get '/mypage', to: 'home#mypage'
   devise_for :users
   get '/users/account', to: 'users#show'
   resources :events do
-    resources :schedules
     resource :attendances
     resources :payments
   end

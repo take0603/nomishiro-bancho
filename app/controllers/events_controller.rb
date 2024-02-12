@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def new
     @event = current_user.events.build
+    @event.schedules.build
   end
 
   def create
@@ -31,8 +32,10 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
+      # Schedule新規追加時、既存メンバー分のAttendanceレコードをデフォルト値で作成する
+      @event.schedules.map { |schedule| Attendance.create_related_attendance(schedule) if @event.members.present? && schedule.members.blank? }
       flash[:notice] = "イベント情報が更新されました。"
-      redirect_to event_path(@event.id)
+      redirect_to event_path(@event)
     else
       render "edit", status: :unprocessable_entity
     end
@@ -47,7 +50,7 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.require(:event).permit(:user_id, :event_name, :explanation)
+    params.require(:event).permit(:id, :user_id, :event_name, :explanation, :date, :deadline,  schedules_attributes: [:id, :event_id, :schedule_date, :_destroy])
   end
 
   def correct_user

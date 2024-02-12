@@ -4,4 +4,6 @@ class Schedule < ApplicationRecord
   has_many :members, through: :attendances
 
   validates :schedule_date, presence: true
+
+  default_scope { order(schedule_date: :asc) }
 end

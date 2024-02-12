@@ -1,7 +1,14 @@
+window.onload = function() {
+  addDeleteEvent();
+  addSumFeeEvent();
+  if (window.location.pathname.includes('edit')) {
+    sumFee();
+  };
+};
+
 // new edit 行(フォーム)追加
 let i = document.getElementById('payment_table').rows.length;
 const addButton = document.getElementById('addButton');
-
 addButton.addEventListener('click', function() {
   const table = document.getElementById('payment_table');
   const row = table.insertRow(-1);
@@ -51,7 +58,6 @@ addButton.addEventListener('click', function() {
 });
 
 // new edit 行(フォーム)削除
-addDeleteEvent();
 function addDeleteEvent() {
   const deleteButton = document.querySelectorAll('.deleteButton');
   deleteButton.forEach(function(button) {
@@ -114,7 +120,6 @@ calcButton.addEventListener('click', function() {
 });
 
 // new edit　各メンバーの支払額合計・イベント総額に対する差額表示
-addSumFeeEvent();
 function addSumFeeEvent() {
   let row = document.querySelectorAll('.payment_row');
   row.forEach(function(row) {
@@ -133,8 +138,4 @@ function sumFee() {
   });
   document.getElementById('sum_fee').innerHTML = totalFee;
   document.getElementById('diff_fee').innerHTML = amount - totalFee;
-};
-
-if (window.location.pathname.includes('edit')) {
-  sumFee();
 };
