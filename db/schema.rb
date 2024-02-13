@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_04_114126) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_12_185921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_04_114126) do
     t.text "explanation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.date "deadline"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -63,7 +65,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_04_114126) do
   create_table "schedules", force: :cascade do |t|
     t.bigint "event_id", null: false
     t.datetime "schedule_date", null: false
-    t.boolean "is_confirmed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_schedules_on_event_id"

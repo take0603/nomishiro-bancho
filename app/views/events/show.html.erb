@@ -7,7 +7,11 @@
     <%= @event.explanation %>
   </div>
   <div>
-    <span>開催日（確定）:</span><%= l @schedule.schedule_date if @schedule.present? %>
+    <span>開催日（確定）:</span><%= l @event.date if @event.date %>
+  </div>
+  <div>
+    <span>回答期限</span>
+    <%= @event.deadline %>
   </div>
   <div>
     <p>候補日</p>

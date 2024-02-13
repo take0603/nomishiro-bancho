@@ -4,6 +4,7 @@ class Event < ApplicationRecord
   has_many :attendances, dependent: :destroy
   has_many :members, through: :attendances, dependent: :destroy
   has_many :payments, dependent: :destroy
+  has_many :payment_details, through: :payments
 
   accepts_nested_attributes_for :schedules, allow_destroy: true
 
