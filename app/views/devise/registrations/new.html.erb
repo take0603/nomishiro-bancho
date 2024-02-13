@@ -26,4 +26,5 @@
       <%= f.submit "ユーザー登録" %>
     </div>
   <% end %>
+  <%= link_to "ゲストユーザーとしてお試しログイン", users_guest_sign_in_path, data: {"turbo-method": :post} %>
 </div>
