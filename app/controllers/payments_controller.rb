@@ -27,6 +27,7 @@ class PaymentsController < ApplicationController
   def show
     @event = Event.find(params[:event_id])
     @payment = Payment.find(params[:id])
+    @participant = @payment.payment_details.order([fee: :desc, id: :asc])
   end
 
   def edit

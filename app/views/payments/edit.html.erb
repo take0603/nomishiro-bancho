@@ -58,7 +58,7 @@
             </tr>
           </thead>
           <tbody id="payment_table">
-            <%= f.fields_for :payment_details do |detail| %>
+            <%= f.fields_for :payment_details, @payment.payment_details.sort_by{ |a| [-a[:fee], a[:id]] } do |detail| %>
               <tr class="payment_row">
                 <%= render "shared/error_messages", object: detail.object, key: "participant" %>
                 <td>
