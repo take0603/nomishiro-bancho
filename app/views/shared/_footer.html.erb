@@ -1,3 +1,10 @@
-<footer class="container border-top mt-4">
-  <p>フッター</p>
+<footer>
+  <div>
+    <%= link_to image_tag("logo.png"), root_path, class: "footer_logo" %>
+    <%= link_to "https://github.com/take0603/nomishiro-bancho", class: "github_logo" do %>
+      <i class="fa-brands fa-github fa-xl" style="color: #000000;"></i>
+    <% end %>
+  </div>
+  <hr>
+  <p><small>&copy; 2024 Shohei Takeda</small></p>
 </footer>

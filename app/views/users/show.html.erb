@@ -1,21 +1,28 @@
 <div class="container">
-  <h1>アカウント情報</h1>
-  <div>
+  <div class="user_title">
+    <h2>アカウント情報</h2>
+    <%= link_to edit_user_registration_path do %>
+      <i class="fa-solid fa-user-pen fa-lg"></i>編集
+    <% end %>
+  </div>
+  <div class="userform_wrapper">
     <div>
-      <span>ユーザー名</span>
-      <%= @user.name %>
-    </div>
-    <div>
-      <span>メールアドレス</span>
-      <%= @user.email %>
-    </div>
-    <div>
-      <span>パスワード</span>
-      <span>※※※※※※※※</span>
-      <span>/※セキュリティ上パスワードは非表示となっています。</span>
-    </div>
-    <div>
-      <%= link_to "編集", edit_user_registration_path %>
+      <div class="account_column">
+        <p>ユーザー名</p>
+        <%= @user.name %>
+      </div>
+      <div class="account_column">
+        <p>メールアドレス</p>
+        <%= @user.email %>
+      </div>
+      <div class="account_column">
+        <p>パスワード</p>
+        <span>※※※※※※※※</span>
+      </div>
+      <div class="account_column">
+        <span></span>
+        <span class="account_p_small">>セキュリティ上パスワードは非表示となっています。</span>
+      </div>
     </div>
   </div>
 </div>

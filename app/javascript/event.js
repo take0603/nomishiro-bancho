@@ -14,9 +14,13 @@ addButton.addEventListener('click', function() {
 
   let scheduleForm = `
     <input type=datetime-local
+    class="form-control"
     name=event[schedules_attributes][${i}][schedule_date]
     id=event_schedules_attributes_${i}_schedule_date>`;
-  let deleteButton = `<span class=deleteScheduleForm>削除</span>`;
+  let deleteButton = `
+    <button type="button" class="deleteScheduleForm">
+      <i class="fa-solid fa-trash" style="color: #757070;"></i>
+    </button>`;
   cell_schedule.innerHTML = scheduleForm;
   cell_delete.innerHTML = deleteButton;
   addDeleteEvent();
@@ -37,7 +41,7 @@ function hiddenRow() {
   row.className = 'schedule_row_hidden';
 
   // update時にaccepts_nested_attributes_forでDBレコード削除のため_destroy属性を追加
-  let i = row.rowIndex - 1;
+  let i = row.rowIndex;
   let deleteAttribute = `
     <input value=true
     type=hidden

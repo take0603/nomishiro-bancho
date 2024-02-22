@@ -1,15 +1,26 @@
 <div class="container">
-  <h1>イベント一覧</h1>
-  <div>
-    <%= link_to "新規イベントを作成", new_event_path %>
+  <div class="event_index_title">
+    <h2>イベント一覧</h2>
+    <div>
+      <%= link_to "新規イベント作成", new_event_path, class: "new_event_btn" %>
+    </div>
   </div>
-  <div>
-    <% @events.each do |event| %>
-      <div>
-        <%= event.event_name %>
-        <%= event.explanation %>
-        <%= link_to "詳細", event_path(event) %>
-      </div>
-    <% end %>
+  <div class="event_index_container">
+    <ul class="event_index_list">
+      <li class="event_index_head">
+        <div>イベント名</div>
+        <div class="event_index_explanation">イベントの概要</div>
+        <div>開催日</div>
+      </li>
+      <% @events.each do |event| %>
+        <li class="event_index_li">
+          <%= link_to event_path(event.id) do %>
+            <div><%= event.event_name %></div>
+            <div class="event_index_explanation"><%= event.explanation %></div>
+            <div><%= l event.date, format: :date_long if event.date %></div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </div>

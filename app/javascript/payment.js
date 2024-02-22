@@ -21,11 +21,11 @@ addButton.addEventListener('click', function() {
 
   let nameForm = `
     <label class=payment_label for=payment_payment_details_attributes_${i}_participant>名前</label>
-    <input type=text
+    <input type=text class=form-control
     name=payment[payment_details_attributes][${i}][participant]
     id=payment_payment_details_attributes_${i}_participant>`;
   let ratioForm = `
-    <select>
+    <select class=form-select>
       <optgroup label="多い"></optgroup>
       <option value="5">5</option>
       <option value="4">4</option>
@@ -38,14 +38,14 @@ addButton.addEventListener('click', function() {
     </select>`;
   let feeForm = `
     <label class=payment_label for=payment_payment_details_attributes_${i}_fee>支払額</label>
-    <input class=payment_fee_form type=number value=0
+    <input class="payment_fee_form form-control" type=number value=0
     name=payment[payment_details_attributes][${i}][fee]
     id=payment_payment_details_attributes_${i}_fee>`;
   let isPaid = `
     <label class=payment_label for=payment_payment_details_attributes_${i}_is_paid>支払済</label>
     <input name=payment[payment_details_attributes][${i}][is_paid] type=hidden value=0 autocomplete=off>
     <input type=checkbox value=1 name=payment[payment_details_attributes][${i}][is_paid] id=payment_payment_details_attributes_${i}_is_paid>`
-  let deleteButton = `<span class="deleteButton">削除</span>`;
+  let deleteButton = `<button type="button" class="deleteButton"><i class="fa-solid fa-trash" style="color: #757070;"></i></button>`;
   cell_participant.innerHTML = nameForm;
   cell_ratio.innerHTML = ratioForm;
   cell_fee.innerHTML = feeForm;

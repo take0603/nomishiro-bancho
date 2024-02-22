@@ -1,80 +1,91 @@
 <div class="container">
-  <h1>マイページ</h1>
-  <h3><%= "#{current_user.name}さんのタスク一覧" %></h3>
-  <%= link_to "新規イベントを作成する", new_event_path %>
-  <div>
-    <table>
-      <tr>
-        <th>
-          <%= "出欠" %>
-        </th>
-      </tr>
-      <% @events_attendance.each do |event| %>
-        <tr>
-          <td>
-            <%= event.event_name %>
-          </td>
-          <td>
-            <span>出欠締め切り：</span><%= event.deadline %>
-          </td>
-          <td>
-            <%= link_to "編集", edit_event_path(event) %>
-          </td>
-          <td>
-            <%= link_to "出欠表", event_attendances_path(event) %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+  <div class="mypage_title_container">
+    <h2><%= "#{current_user.name}さんのタスク一覧" %></h2>
+    <%= link_to "新規イベント作成", new_event_path, class: "new_event_btn" %>
   </div>
-  <div>
-    <table>
-      <tr>
-        <th>
-          <%= "開催待ち" %>
-        </th>
-      </tr>
-      <% @events_before_date.each do |event| %>
-        <tr>
-          <td>
-            <%= event.event_name %>
-          </td>
-          <td>
-            <span>開催日：</span><%= l event.date %>
-          </td>
-          <td>
-            <%= link_to "編集", edit_event_path(event) %>
-          </td>
-          <td>
-            <%= link_to "出欠表", event_attendances_path(event) %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+  <div class="task_container">
+    <div class="task_table attendance">
+      <div class="title">
+        <p>出欠・日程決め<p>
+      </div>
+      <ul>
+        <% @events_attendance.each do |event| %>
+          <li class="task_list">
+            <div>
+              <%= link_to "#{event.event_name}", event_path(event), class: "event_name_link" %>
+            </div>
+            <div class="task_list_detail">
+              <p><%= "締切：#{l event.deadline, format: :long}" %></p>
+              <div class="task_icon">
+                <%= link_to edit_event_path(event) do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+                <%= link_to event_attendances_path(event) do %>
+                  <i class="fa-solid fa-users"></i>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="task_table before">
+      <div class="title">
+        <p>開催待ち</p>
+      </div>
+      <ul>
+        <% @events_before_date.each do |event| %>
+          <li class="task_list">
+            <div>
+              <%= link_to "#{event.event_name}", event_path(event), class: "event_name_link" %>
+            </div>
+            <div class="task_list_detail">
+              <p><%= "日程：#{l event.date, format: :date_long}" %></p>
+              <div class="task_icon">
+                <%= link_to edit_event_path(event) do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+                <%= link_to event_attendances_path(event) do %>
+                  <i class="fa-solid fa-users"></i>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="task_table payment">
+      <div class="title">
+        <p>精算</p>
+      </div>
+      <ul>
+        <% @events_payment.each do |event| %>
+          <li class="task_list">
+            <div>
+              <%= link_to "#{event.event_name}", event_path(event), class: "event_name_link" %>
+            </div>
+            <div class="task_list_detail">
+              <p><%= "開催済：#{l event.date, format: :date_long}" %></p>
+              <div class="task_icon">
+                <%= link_to edit_event_path(event) do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+                <%= link_to event_attendances_path(event) do %>
+                  <i class="fa-solid fa-users"></i>
+                <% end %>
+                <%= link_to event_payments_path(event) do %>
+                  <i class="fa-solid fa-yen-sign"></i>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-  <div>
-    <table>
-      <tr>
-        <th>
-          <%= "精算" %>
-        </th>
-      </tr>
-      <% @events_payment.each do |event| %>
-        <tr>
-          <td>
-            <%= event.event_name %>
-          </td>
-          <td>
-            <%= link_to "編集", edit_event_path(event) %>
-          </td>
-          <td>
-            <%= link_to "出欠表", event_attendances_path(event) %>
-          </td>
-          <td>
-            <%= link_to "支払表", event_payments_path(event) %>
-          </td>
-        </tr>
-      <% end %>
-    </table>
+  <div class="mypage_eventindex_container">
+    <%= link_to events_path do %>
+      イベント一覧<i class="fa-solid fa-chevron-right"></i>
+    <% end %>
   </div>
 </div>
