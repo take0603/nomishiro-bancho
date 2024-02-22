@@ -3,13 +3,13 @@
     <div>
       <h2><%= @event.event_name %>の支払表一覧</h2>
     </div>
-    <%= link_to "新規支払表の作成", new_event_payment_path, class: "payment_btn" %>
+    <%= link_to "新規支払表の作成", new_event_payment_path, class: "payment_btn", data: { turbo: false } %>
   </div>
   <div>
     <ul>
       <% @event.payments.each do |payment| %>
         <li class="payment_index_li">
-          <%= link_to event_payment_path(params[:event_id], payment.id), class:"payment_link" do %>
+          <%= link_to event_payment_path(params[:event_id], payment.id), class:"payment_link", data: { turbo: false } do %>
             <p><%= payment.payment_name %></p>
             <p><%= number_to_currency(payment.amount, unit: "￥", format: "%u %n") %></p>
           <% end %>

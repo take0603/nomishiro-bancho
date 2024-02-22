@@ -4,7 +4,7 @@
       <h2>支払表</h2>
       <p><%= @payment.payment_name %></p>
     </div>
-    <%= link_to "支払表の編集", edit_event_payment_path(params[:event_id], @payment), class: "payment_btn" %>
+    <%= link_to "支払表の編集", edit_event_payment_path(params[:event_id], @payment), class: "payment_btn", data: { turbo: false } %>
   </div>
   <div class="payment_wrapper">
     <div class="payment_amount_show">

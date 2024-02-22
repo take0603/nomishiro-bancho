@@ -3,7 +3,7 @@
 <div class="container">
   <div class="payment_wrapper">
     <h2>支払表作成</h2>
-    <%= form_with model: @payment, url: event_payments_path do |f| %>
+    <%= form_with model: @payment, url: event_payments_path, data: { turbo: false } do |f| %>
       <div class="row mb-3">
         <%= f.label :payment_name, "支払表名", class: "col-sm-4 col-form-label" %>
         <div class="col-sm-8">

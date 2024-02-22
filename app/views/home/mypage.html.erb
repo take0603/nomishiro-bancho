@@ -1,7 +1,7 @@
 <div class="container">
   <div class="mypage_title_container">
     <h2><%= "#{current_user.name}さんのタスク一覧" %></h2>
-    <%= link_to "新規イベント作成", new_event_path, class: "new_event_btn" %>
+    <%= link_to "新規イベント作成", new_event_path, class: "new_event_btn", data: { turbo: false } %>
   </div>
   <div class="task_container">
     <div class="task_table attendance">
@@ -17,7 +17,7 @@
             <div class="task_list_detail">
               <p><%= "締切：#{l event.deadline, format: :long}" %></p>
               <div class="task_icon">
-                <%= link_to edit_event_path(event) do %>
+                <%= link_to edit_event_path(event), data: { turbo: false } do %>
                   <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
                 <%= link_to event_attendances_path(event) do %>
@@ -42,7 +42,7 @@
             <div class="task_list_detail">
               <p><%= "日程：#{l event.date, format: :date_long}" %></p>
               <div class="task_icon">
-                <%= link_to edit_event_path(event) do %>
+                <%= link_to edit_event_path(event), data: { turbo: false } do %>
                   <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
                 <%= link_to event_attendances_path(event) do %>
@@ -67,7 +67,7 @@
             <div class="task_list_detail">
               <p><%= "開催済：#{l event.date, format: :date_long}" %></p>
               <div class="task_icon">
-                <%= link_to edit_event_path(event) do %>
+                <%= link_to edit_event_path(event), data: { turbo: false } do %>
                   <i class="fa-solid fa-pen-to-square"></i>
                 <% end %>
                 <%= link_to event_attendances_path(event) do %>

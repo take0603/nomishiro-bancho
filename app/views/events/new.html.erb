@@ -3,7 +3,7 @@
 <div class="container">
   <div class="eventform_wrapper">
     <h2>イベント作成</h2>
-    <%= form_with model: @event, url: events_path do |f| %>
+    <%= form_with model: @event, url: events_path, data: { turbo: false } do |f| %>
       <div class="row mb-3">
         <%= f.label :event_name, "イベント名", class: "col-sm-4 col-form-label" %>
         <div class="col-sm-8">
