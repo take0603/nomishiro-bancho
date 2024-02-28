@@ -17,7 +17,7 @@ class PaymentsController < ApplicationController
     @event = Event.find(params[:event_id])
     @payment = @event.payments.build(payment_params)
     if @payment.save
-      flash[:notice] = "支払い表を作成しました。"
+      flash[:notice] = "支払表を作成しました。"
       redirect_to event_payment_path(id: @payment.id)
     else
       render :new, status: :unprocessable_entity
@@ -39,7 +39,7 @@ class PaymentsController < ApplicationController
     @event = Event.find(params[:event_id])
     @payment = Payment.find(params[:id])
     if @payment.update(payment_params)
-      flash[:notice] = "支払い表を編集しました。"
+      flash[:notice] = "支払表を編集しました。"
       redirect_to event_payment_path(id: @payment.id)
     else
       render :edit, status: :unprocessable_entity
@@ -49,7 +49,7 @@ class PaymentsController < ApplicationController
   def destroy
     @payment = Payment.find(params[:id])
     @payment.destroy
-    flash[:notice] = "支払い表が削除されました。"
+    flash[:notice] = "支払表が削除されました。"
     redirect_to event_payments_path
   end
 

@@ -7,8 +7,8 @@ class HomeController < ApplicationController
   def mypage
     events = current_user.events
     @events_attendance = events.where(date: nil)
-    @events_before_date = events.where("date > ?", Time.zone.today)
-    @events_payment = events.where("date < ?", Time.zone.today).where.missing(:payments) |
-                      events.joins(:payment_details).where(payment_details: {is_paid: false}).distinct
+    @events_before_date = events.where("date >= ?", Time.now)
+    @events_payment = events.where("date < ?", Time.now).where.missing(:payments) |
+                      events.joins(:payment_details).where("date < ?", Time.now).where(payment_details: {is_paid: false}).distinct
   end
 end

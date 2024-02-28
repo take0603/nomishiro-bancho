@@ -61,6 +61,23 @@
   text-decoration-color: rgba(255, 228, 0, 0.4);
   text-underline-offset: -0.3em;
   text-decoration-skip-ink: none;
+  font-size: 2rem;
+}
+
+.top_explanation h2 br {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .top_explanation  {
+    text-align: left;
+  }
+  .top_explanation h2 {
+    text-align: center;
+  }
+  .top_explanation h2 br {
+    display: block;
+  }
 }
 
 .top_service {
