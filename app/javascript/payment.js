@@ -6,6 +6,10 @@ window.onload = function() {
   };
 };
 
+window.addEventListener('popstate', function() {
+  location.reload();
+});
+
 // new edit 行(フォーム)追加
 let i = document.getElementById('payment_table').rows.length;
 const addButton = document.getElementById('addButton');

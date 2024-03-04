@@ -2,6 +2,10 @@ window.onload = function() {
   addDeleteEvent();
 };
 
+window.addEventListener('popstate', function() {
+  location.reload();
+});
+
 // new edit　候補日フォーム追加
 let i = document.getElementById('schedule_table').rows.length;
 const addButton = document.getElementById('addScheduleForm');
