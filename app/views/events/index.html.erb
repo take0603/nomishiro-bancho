@@ -14,7 +14,7 @@
       </li>
       <% @events.each do |event| %>
         <li class="event_index_li">
-          <%= link_to event_path(event.id) do %>
+          <%= link_to event_path(event) do %>
             <div><%= event.event_name %></div>
             <div class="event_index_explanation"><%= event.explanation %></div>
             <div><%= l event.date, format: :date_long if event.date %></div>

@@ -60,12 +60,17 @@ RSpec.describe "Attendances", type: :request do
     let(:user) { create(:user) }
     let(:event) { create(:event, user: user) }
     let(:schedule) { create(:schedule, event: event) }
-    let(:valid_params) { { member: { member_name: 'テストメンバー' } } }
+    let(:valid_params) { { member: { member_name: 'テストメンバー', attendances_attributes: { "0": { event_id: event.id, schedule_id: schedule.id, answer: "ok" } } } } }
     let(:invalid_params) { { member: { member_name: '' } } }
 
     context "有効なパラメータの場合" do
       it "回答者のレコードを作成すること" do
         expect{ post event_attendances_path(event), params: valid_params }.to change{ Member.count }.by(1)
+      end
+
+      it "ネストしたパラメータから回答者に紐付く回答内容のレコードを作成すること" do
+        expect{ post event_attendances_path(event), params: valid_params }.to change{ Attendance.count }.by(1)
+        expect(Member.last.attendances).to include(Attendance.last)
       end
 
       it "出欠表ページへ遷移すること" do
@@ -87,17 +92,24 @@ RSpec.describe "Attendances", type: :request do
     let(:event) { create(:event, user: user) }
     let!(:schedule) { create(:schedule, event: event) }
     let!(:member) { create(:member) }
-    let(:valid_params) { { member: { id: member.id, member_name: '更新するテストメンバー名' } } }
+    let!(:attendance) { create(:attendance, event: event, schedule: schedule, member: member) }
+    let(:valid_params) { { member: { id: member.id, member_name: '更新するテストメンバー名', attendances_attributes: { "0": { id: attendance.id, answer: "ng" } } } } }
     let(:invalid_params) { { member: { id: member.id, member_name: '' } } }
 
     context "有効なパラメータの場合" do
-      it "回答者のレコードを更新すること" do
+      before do
         patch event_attendances_path(event, member_id: member.id), params: valid_params
+      end
+
+      it "回答者のレコードを更新すること" do
         expect(member.reload.member_name).to eq valid_params[:member][:member_name]
       end
 
+      it "ネストしたパラメータから回答者に紐付く回答内容のレコードを更新すること" do
+        expect(attendance.reload.answer).to eq valid_params[:member][:attendances_attributes][:"0"][:answer]
+      end
+
       it "出欠表ページへ遷移すること" do
-        patch event_attendances_path(event, member_id: member.id), params: valid_params
         expect(response).to redirect_to(event_attendances_path)
       end
     end

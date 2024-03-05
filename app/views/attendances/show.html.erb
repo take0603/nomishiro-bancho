@@ -9,38 +9,44 @@
       <p>※回答を変更したい場合は名前のリンクをクリックして下さい。</p>
     </div>
     <table class="attendance_table">
-      <tr>
-        <th></th>
-        <% @schedules.each do |schedule| %>
-          <th><%= l schedule.schedule_date, format: :date_short %><br><%= l schedule.schedule_date, format: :only_time %></th>
-        <% end %>
-      </tr>
-      <% @members.each do |member| %>
+      <thead>
         <tr>
-          <th><%= link_to member.member_name, edit_event_attendances_path(@event, member_id: member.id) %></th>
+          <th></th>
           <% @schedules.each do |schedule| %>
-            <td><%= display_attendance_answer(member, schedule) %></td>
+            <th><%= l schedule.schedule_date, format: :date_short %><br><%= l schedule.schedule_date, format: :only_time %></th>
           <% end %>
         </tr>
-      <% end %>
-      <tr class="count_attendance">
-        <th><i class="fa-regular fa-circle"></i></th>
-        <% @schedules.each do |schedule| %>
-          <td><%= display_count_answer(schedule, 1) %></td>
+      </thead>
+      <tbody>
+        <% @members.each do |member| %>
+          <tr>
+            <th><%= link_to member.member_name, edit_event_attendances_path(@event, member_id: member.id) %></th>
+            <% @schedules.each do |schedule| %>
+              <td><%= display_attendance_answer(member, schedule) %></td>
+            <% end %>
+          </tr>
         <% end %>
-      </tr>
-      <tr class="count_attendance">
-        <th><i class="fa-solid fa-play fa-rotate-270"></i></th>
-        <% @schedules.each do |schedule| %>
-          <td><%= display_count_answer(schedule, 2) %></td>
-        <% end %>
-      </tr>
-      <tr class="count_attendance">
-        <th><i class="fa-solid fa-xmark"></i></th>
-        <% @schedules.each do |schedule| %>
-          <td><%= display_count_answer(schedule, 3) %></td>
-        <% end %> 
-      </tr>
+      </tbody>
+      <tfoot>
+        <tr class="count_attendance">
+          <th><i class="fa-regular fa-circle"></i></th>
+          <% @schedules.each do |schedule| %>
+            <td><%= display_count_answer(schedule, 1) %></td>
+          <% end %>
+        </tr>
+        <tr class="count_attendance">
+          <th><i class="fa-solid fa-play fa-rotate-270"></i></th>
+          <% @schedules.each do |schedule| %>
+            <td><%= display_count_answer(schedule, 2) %></td>
+          <% end %>
+        </tr>
+        <tr class="count_attendance">
+          <th><i class="fa-solid fa-xmark"></i></th>
+          <% @schedules.each do |schedule| %>
+            <td><%= display_count_answer(schedule, 3) %></td>
+          <% end %> 
+        </tr>
+      </tfoot>
     </table>
   </div>
 </div>

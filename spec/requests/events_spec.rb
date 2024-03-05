@@ -120,7 +120,7 @@ RSpec.describe "Events", type: :request do
 
   describe "POST #create" do
     let!(:user) { create(:user) }
-    let(:valid_params) { { event: { event_name: 'テストイベント', user: user.id } } }
+    let(:valid_params) { { event: { event_name: 'テストイベント', user: user.id, schedules_attributes: { "0": { schedule_date: Time.current } } } } }
     let(:invalid_params) { { event: { event_name: ''} } } 
 
     context "ユーザーがログイン状態の場合" do
@@ -131,6 +131,11 @@ RSpec.describe "Events", type: :request do
 
         it "イベントのレコードを作成すること" do
           expect{ post events_path, params: valid_params }.to change{ Event.count }.by(1)
+        end
+
+        it "ネストしたパラメータからイベントに紐付く候補日のレコードを作成すること" do
+          expect{ post events_path, params: valid_params }.to change{ Schedule.count }.by(1)
+          expect(Event.last.schedules).to include(Schedule.last)
         end
 
         it "作成したイベント詳細画面に遷移すること" do
@@ -158,7 +163,8 @@ RSpec.describe "Events", type: :request do
     let!(:user1) { create(:user) }
     let!(:user2) { create(:user) }
     let!(:event) { create(:event, user: user1) }
-    let(:valid_params) { { event: { id: event.id, event_name: '更新するイベント名' } } }
+    let!(:schedule) { create(:schedule, event: event) }
+    let(:valid_params) { { event: { id: event.id, event_name: '更新するイベント名', schedules_attributes: { "0": { id: schedule.id, schedule_date: Time.current } } } } }
     let(:invalid_params) { { event: { event_name: ''} } } 
 
     context "ユーザーがログイン状態の場合" do
@@ -177,6 +183,10 @@ RSpec.describe "Events", type: :request do
 
         it "イベントのレコードを更新すること" do
           expect(event.reload.event_name).to eq valid_params[:event][:event_name]
+        end
+
+        it "ネストしたパラメータからイベントに紐付く候補日のレコードを更新すること" do
+          expect(schedule.reload.schedule_date.to_s).to eq valid_params[:event][:schedules_attributes][:"0"][:schedule_date].to_s
         end
 
         it "更新したイベント詳細画面に遷移すること" do

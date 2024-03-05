@@ -6,7 +6,7 @@
   <div class="task_container">
     <div class="task_table attendance">
       <div class="title">
-        <p>出欠・日程決め<p>
+        <p>出欠・日程決め</p>
       </div>
       <ul>
         <% @events_attendance.each do |event| %>
@@ -15,7 +15,7 @@
               <%= link_to "#{event.event_name}", event_path(event), class: "event_name_link" %>
             </div>
             <div class="task_list_detail">
-              <p><%= "締切：#{l event.deadline, format: :long}" %></p>
+              <p><%= "締切：#{l event.deadline, format: :long}" if event.deadline %></p>
               <div class="task_icon">
                 <%= link_to edit_event_path(event), data: { turbo: false } do %>
                   <i class="fa-solid fa-pen-to-square"></i>
