@@ -29,6 +29,7 @@ RSpec.configure do |config|
       driven_by :remote_chrome
     else
       driven_by :selenium_chrome_headless
+      Capybara.current_session.driver.browser.manage.window.resize_to(1920, 1080)
     end
   end
 end
