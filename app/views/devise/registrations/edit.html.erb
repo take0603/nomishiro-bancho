@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="userform_wrapper">
+    <h2>アカウント情報変更</h2>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <div class="row mb-3">
+        <%= f.label :name, class: "col-sm-4 col-form-label required" %>
+        <div class="col-sm-8">
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "name" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :email, class: "col-sm-4 col-form-label required" %>
+        <div class="col-sm-8">
+          <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "email" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :password, class: "col-sm-4 col-form-label" %><br>
+        <div class="col-sm-8">
+          <%= f.password_field :password, placeholder: "#{@minimum_password_length}文字以上 ", class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "password" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :password_confirmation, class: "col-sm-4 col-form-label" %>
+        <div class="col-sm-8">
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "password_confirmation" %>
+        </div>
+      </div>
+      <div class="row mb-5">
+        <%= f.label :current_password, class: "col-sm-4 col-form-label required" %>
+        <div class="col-sm-8">
+          <%= f.password_field :current_password, placeholder: "現在のパスワードを入力", class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "current_password" %>
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit "更新", class: "user_button signup" %>
+        <%= link_to "キャンセル", :back, class: "user_button cancel" %>
+      </div>
+    <% end %>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <p class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            退会はこちら
+          </button>
+        </p>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <%= button_to "アカウントを削除し、退会する", registration_path(resource_name), data: { confirm: "アカウントを削除してもよろしいですか?", turbo_confirm: "アカウントを削除してもよろしいですか?" }, method: :delete, class: "user_button delete_account" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

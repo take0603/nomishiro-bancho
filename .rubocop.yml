@@ -5,7 +5,7 @@ Rails:
   Enabled: true
 
 LineLength:
-  Max: 130
+  Max: 160
 
 AllCops:
   Exclude:
@@ -17,3 +17,6 @@ AllCops:
     - '**/Gemfile'
     - 'vendor/**/*'
     - '.git/**/*'
+
+Airbnb/DefaultScope:
+  Enabled: false

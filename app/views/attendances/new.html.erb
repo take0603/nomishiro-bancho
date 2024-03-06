@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="attendance_form_wrapper">
+    <h2>出欠の入力</h2>
+    <%= form_with model: @member, url: event_attendances_path do |f| %>
+      <div class="name_form">
+        <%= f.label :member_name, "名前", class: "required" %>
+        <%= f.text_field :member_name, class: "form-control" %>
+      </div>
+      <%= render "shared/error_messages", object: f.object, key: "member_name" %>
+      <ul class="attendance_ul">
+        <%= f.fields_for :attendances do |attendance| %>
+          <li class="answer_li">
+            <div class="answer_date">
+              <%= attendance.hidden_field :event_id, value: @event.id %>
+              <%= attendance.hidden_field :schedule_id, value: attendance.object.schedule.id %>
+              <%= l attendance.object.schedule.schedule_date %>
+            </div>
+            <div class="answer_icon">
+              <%= attendance.radio_button :answer, "ok" %> 
+              <%= attendance.label :answer, value: "ok" do %>
+                <i class="fa-regular fa-circle fa-xl circle"></i>
+              <% end %>
+              <%= attendance.radio_button :answer, "maybe" %>
+              <%= attendance.label :answer, value: "maybe" do %>
+                <i class="fa-solid fa-play fa-rotate-270 fa-xl triangle"></i>
+              <% end %>
+              <%= attendance.radio_button :answer, "ng" %>
+              <%= attendance.label :answer, value: "ng" do %>
+                <i class="fa-solid fa-xmark fa-2xl xmark"></i>
+              <% end %>
+            <div>
+          </li>
+        <% end %>
+      </ul>
+      <%= f.submit "回答", class: "attendance_form_button" %>
+    <% end %>
+    <%= link_to :back, class: "back" do %>
+      <i class="fa-solid fa-chevron-left fa-lg"></i>戻る
+    <% end %>
+  </div>
+</div>

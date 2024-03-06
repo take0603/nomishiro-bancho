@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="event_index_title">
+    <h2>イベント詳細</h2>
+    <%= link_to "編集", edit_event_path(@event), class: "event_edit_btn", data: { turbo: false } %>
+  </div>
+  <div class="eventform_wrapper">
+    <h3>イベント</h3>
+    <div class="event_show_column">
+      <p class="event_column_title">イベント名</p>
+      <p><%= @event.event_name %></p>
+    </div>
+    <div class="event_show_column">
+      <p class="event_column_title">イベントの概要</p>
+      <p><%= @event.explanation %></p>
+    </div>
+    <div class="event_show_column">
+      <p class="event_column_title">開催日</p>
+      <p><%= l @event.date if @event.date %></p>
+    </div>
+    <div class="event_show_column">
+      <p class="event_column_title">出欠回答期限</p>
+      <p><%= l @event.deadline, format: :long if @event.deadline %></p>
+    </div>
+    <div class="event_show_column">
+      <div>
+        <p class="event_column_title">候補日</p>
+      </div>
+      <div>
+        <% @event.schedules.each do |schedule| %>
+          <p><%= l schedule.schedule_date %></p>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+    <div>
+      <p>出欠表URL</p>
+      <p class="url_box"><%= "#{request.url}/attendances" %></p>
+      <p class="url_p">※参加予定者は上記URLより出欠の回答が可能です。（ログイン不要）</p>
+    </div>
+  </div>
+  <div class="eventform_wrapper">
+    <h3>関連メニュー</h3>
+    <div class="event_menu">
+      <%= link_to event_attendances_path(@event) do %>
+        <i class="fa-solid fa-users"></i>出欠表
+      <% end %>
+    </div>
+    <div class="event_menu">
+      <%= link_to event_payments_path(@event) do %>
+        <i class="fa-solid fa-yen-sign"></i>支払表
+      <% end %>
+    </div>
+  </div>
+</div>

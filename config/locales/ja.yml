@@ -1,0 +1,77 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        confirmation_sent_at: パスワード確認送信時刻
+        confirmation_token: パスワード確認用トークン
+        confirmed_at: パスワード確認時刻
+        created_at: 作成日
+        current_password: 現在のパスワード
+        current_sign_in_at: 現在のログイン時刻
+        current_sign_in_ip: 現在のログインIPアドレス
+        email: メールアドレス
+        encrypted_password: 暗号化パスワード
+        failed_attempts: 失敗したログイン試行回数
+        last_sign_in_at: 最終ログイン時刻
+        last_sign_in_ip: 最終ログインIPアドレス
+        locked_at: ロック時刻
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        remember_created_at: ログイン記憶時刻
+        remember_me: ログインを記憶する
+        reset_password_sent_at: パスワードリセット送信時刻
+        reset_password_token: パスワードリセット用トークン
+        sign_in_count: ログイン回数
+        unconfirmed_email: 未確認Eメール
+        unlock_token: ロック解除用トークン
+        updated_at: 更新日
+      event:
+        event_name: イベント名
+        explanation: イベント概要
+        date: 開催日
+        deadline: 出欠回答期限
+      schedule:
+        schedule_date: 候補日
+      attendance:
+        answer: 回答
+      member:
+        member_name: 名前
+      payment:
+        payment_name: 支払表名
+        amount: 総額
+      payment_detail:
+        participant: 参加者名
+        fee: 会費
+        is_paid: 支払済
+    models:
+      user: ユーザー
+      event: イベント
+      schedule: 候補日
+      attendance: 出欠表
+      member: メンバー
+      payment: 支払表
+      payment_detail: 支払表明細
+  errors:
+    messages:
+      already_confirmed: は既に登録済みです。ログインしてください。
+      confirmation_period_expired: の期限が切れました。%{period} までに確認する必要があります。 新しくリクエストしてください。
+      expired: の有効期限が切れました。新しくリクエストしてください。
+      not_found: は見つかりませんでした。
+      not_locked: はロックされていません。
+      not_saved:
+        one: エラーが発生したため %{resource} は保存されませんでした。
+        other: "%{count} 件のエラーが発生したため %{resource} は保存されませんでした。"
+  date:
+    formats:
+      default: "%Y.%m.%d"
+      long: "%-Y年%-m月%-d日"
+      short: "%m月%d日"
+  time:
+    formats:
+      default: "%-Y年%-m月%-d日 %H時%M分"
+      long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      short: "%y/%m/%d %H:%M"
+      date_long: "%Y年%-m月%-d日"
+      date_short: "%-m月%-d日"
+      datetime: "%Y.%m.%d %H時%M分"
+      only_time: "%H:%M"

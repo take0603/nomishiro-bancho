@@ -1,0 +1,66 @@
+<script type="module">import "event";</script>
+
+<div class="container">
+  <div class="eventform_wrapper">
+    <h2>イベント作成</h2>
+    <%= form_with model: @event, url: events_path, data: { turbo: false } do |f| %>
+      <div class="row mb-3">
+        <%= f.label :event_name, "イベント名", class: "col-sm-4 col-form-label required" %>
+        <div class="col-sm-8">
+          <%= f.text_field :event_name, class: "form-control", placeholder: "例：◯◯会、◯期打ち上げ、など" %>
+          <%= render "shared/error_messages", object: f.object, key: "event_name" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :explanation, "イベントの概要", class: "col-sm-4 col-form-label" %>
+        <div class="col-sm-8">
+          <%= f.text_area :explanation, class: "form-control", placeholder: "例：場所は◯◯駅の予定です、◯◯さん歓迎会です、など" %>
+          <%= render "shared/error_messages", object: f.object, key: "explanation" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :date, "開催日（確定後に入力）", class: "col-sm-4 col-form-label" %>
+        <div class="col-sm-8">
+          <%= f.datetime_field :date, class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "date" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :deadline, "出欠回答期限", class: "col-sm-4 col-form-label" %>
+        <div class="col-sm-8">
+          <%= f.date_field :deadline, class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "deadline" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-4 col-form-label">
+          <p class="required">候補日</p>
+        </div>
+        <div class="col-sm-8">
+          <table id="schedule_table">
+            <tbody>
+              <%= f.fields_for :schedules do |schedule| %>
+                <%= render "shared/error_messages", object: schedule.object, key: "schedule_date" %>
+                <tr class="schedule_row">
+                  <td>
+                    <%= schedule.datetime_field :schedule_date, class: "form-control" %>
+                  </td>
+                  <td>
+                    <button type="button" class="deleteScheduleForm"><i class="fa-solid fa-trash" style="color: #757070;"></i></button>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <div>
+            <button type="button" id="addScheduleForm"><i class="fa-regular fa-calendar-plus fa-lg"></i>追加</button>
+          </div>
+        </div>
+      </div>
+      <%= f.submit "作成", class: "event_button" %>
+      <%= link_to :back, class: "back" do %>
+        <i class="fa-solid fa-chevron-left fa-lg"></i>戻る
+      <% end %>
+    <% end %>
+  </div>
+</div>

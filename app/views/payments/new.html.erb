@@ -1,0 +1,104 @@
+<script type="module">import "payment";</script>
+
+<div class="container">
+  <div class="payment_wrapper">
+    <h2>支払表作成</h2>
+    <%= form_with model: @payment, url: event_payments_path, data: { turbo: false } do |f| %>
+      <div class="row mb-3">
+        <%= f.label :payment_name, "支払表名", class: "col-sm-4 col-form-label required" %>
+        <div class="col-sm-8">
+          <%= f.text_field :payment_name, placeholder: "例：◯◯代金", class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "payment_name" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :amount, "総額", class: "col-sm-4 col-form-label required" %>
+        <div class="col-sm-8">
+          <%= f.number_field :amount, class: "form-control" %>
+          <%= render "shared/error_messages", object: f.object, key: "amount" %>
+        </div>
+      </div>
+      <hr>
+      <div class="row mb-4">
+        <p class="col-sm-4">端数単位</p>
+        <div class="col-sm-8 calc_selector">
+          <div>
+            <input type="radio" id="round_default" name="round" value="default" checked>
+            <label for="round_default">標準</label>
+          </div>
+          <div>
+            <input type="radio" id="round_100yen" name="round" value="100yen">
+            <label for="round_100yen">100円単位</label>
+          </div>
+          <div>
+            <input type="radio" id="round_500yen" name="round" value="500yen">
+            <label for="round_500yen">500円単位</label>
+          </div>
+        </div>
+      </div>
+      <div class="calculation_btn">
+        <button type="button" id="calcButton" class="calcButton">計算する</button>
+      </div>
+      <div class="price_field">
+        <div class="price_field_row">
+          <div>支払額合計：<span id="sum_fee"></span></div>
+        </div>
+        <div class="price_field_row">
+          <div>振り分け残額：<span id="diff_fee"></span></div>
+        </div>
+      </div>
+      <div class="payment_table">
+        <table>
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>傾斜</th>
+              <th>支払額</th>
+              <th>支払済</th>
+            </tr>
+          </thead>
+          <tbody id="payment_table">
+            <%= f.fields_for :payment_details do |detail| %>
+              <tr class="payment_row">
+                <%= render "shared/error_messages", object: detail.object, key: "participant" %>
+                <td>
+                  <%= detail.label :participant, "名前", class: "payment_label" %>
+                  <%= detail.text_field :participant, value: detail.object.participant, class: "form-control" %>
+                </td>
+                <td>
+                  <select class="form-select">
+                    <optgroup label="多い"></optgroup>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3" selected>3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    <optgroup label="少ない"></optgroup>
+                    <hr>
+                    <option value="0">請求なし</option>
+                  </select>
+                </td>
+                <td>
+                  <%= detail.label :fee, "支払額", class: "payment_label" %>
+                  <%= detail.number_field :fee, class: "payment_fee_form form-control" %>
+                </td>
+                <td class="check">
+                  <%= detail.label :is_paid, "支払済", class: "payment_label" %>
+                  <%= detail.check_box :is_paid %>
+                </td>
+                <td>
+                  <button type="button" class="deleteButton"><i class="fa-solid fa-trash" style="color: #757070;"></i></button>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <button type="button" id="addButton"><i class="fa-solid fa-user-plus fa-lg"></i>追加</button>
+      </div>
+      <%= f.submit "保存", class: "payment_button" %>
+    <% end %>
+    <%= link_to :back, class: "back" do %>
+      <i class="fa-solid fa-chevron-left fa-lg"></i>戻る
+    <% end %>
+  </div>
+</div>

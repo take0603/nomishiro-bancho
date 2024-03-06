@@ -17,3 +17,13 @@ services:
       - "3000:3000"
     depends_on:
       - db
+      - selenium_chrome
+    tty: true
+    stdin_open: true
+    environment: 
+      SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+    shm_size: "2g"
+    ports:
+      - 4444:4444

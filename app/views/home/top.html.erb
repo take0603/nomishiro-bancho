@@ -1,0 +1,121 @@
+<div class="top_main">
+  <%= image_tag "top_image.jpg" %>
+  <div>
+    <span>幹事は、</span>
+    <span>面倒で、</span>
+    <span>退屈だ。</span>
+  </div>
+</div>
+<div class="top_explanation">
+  <div class="top_container">
+    <h2>複数の幹事作業を<br>まとめて管理</h2>
+    <p>「飲み代番長」は幹事の方をサポートする為の飲み会管理ツールです。<br>
+      本サービスでは自己管理していた飲み会の各種情報や作業を一元化することができます。<br>
+      業務外であったとしても、同等の根回しが求められる事の多い幹事の方の為に生まれました。
+    </p>
+  </div>
+</div>
+<div class="top_container">
+  <div class="top_service">
+    <h2>サービス</h2>
+    <div class="top_service_content">
+      <div class="service_left">
+        <h3>企画</h3>
+        <p>
+          まずは管理対象のイベントを作成しましょう。<br>
+          イベントを作成する事で、出欠表のURLが自動で発行されます。<br>
+        </p>
+      </div>
+      <div id="carouselPlanning" class="carousel slide carousel-dark">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag "reminder-note.svg", class:"d-block w-100", alt: "画像" %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag "create_event_image.png", class:"d-block w-100", alt: "画像" %>
+          </div>
+        </div>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPlanning" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="top_service_content">
+      <div class="service_left">
+        <h3>出欠</h3>
+        <p>
+          発行された出欠表URLを参加予定者に送り出欠の回答をしてもらいましょう。<br>
+          回答者はログイン不要、全員の回答状況や候補日ごとの参加可否人数を可視化します。
+        </p>
+      </div>
+      <div id="carouselAttendance" class="carousel slide carousel-dark">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag "user-status.svg", class:"d-block w-100", alt: "画像" %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag "attendance_image.png", class:"d-block w-100", alt: "画像" %>
+          </div>
+        </div>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselAttendance" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="top_service_content">
+      <div class="service_left">
+        <h3>精算</h3>
+        <p>
+          無事イベントが終了したら計算ツールを使い支払表を作り、参加者へ回付しましょう。<br>
+          計算は割り勘や傾斜を考慮した振り分けが可能、ご自身で差額計算をしたりといったことは不要です。
+        </p>
+      </div>
+      <div id="carouselPayment" class="carousel slide carousel-dark">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag "calculator.svg", class:"d-block w-100", alt: "画像" %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag "payment_image.png", class:"d-block w-100", alt: "画像" %>
+          </div>
+        </div>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselPayment" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="top_service_content">
+      <div class="service_left">
+        <h3>管理</h3>
+        <p>
+          対応漏れがないよう、ステータスごとに要対応タスクをマイページに表示。
+          複数のイベントが同時並行的に発生する年末なども安心です。
+        </p>
+      </div>
+      <div id="carouselTask" class="carousel slide carousel-dark">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <%= image_tag "completed-task.svg", class:"d-block w-100", alt: "画像" %>
+          </div>
+          <div class="carousel-item">
+            <%= image_tag "task_image.png", class:"d-block w-100", alt: "画像" %>
+          </div>
+        </div>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselTask" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="registration_reccomend">
+    <h2>幹事は嫌いですか？</h2>
+    <p>ユーザー登録をして管理を開始</p>
+    <%= link_to "ユーザー登録", new_user_registration_path %>
+    <span>または</span>
+    <%= link_to "ゲストログイン", users_guest_sign_in_path, data: { turbo_method: :post } %>
+  </div>
+</div>

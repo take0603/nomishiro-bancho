@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="payment_title">
+    <div>
+      <h2>支払表</h2>
+      <p><%= @payment.payment_name %></p>
+    </div>
+    <%= link_to "支払表の編集", edit_event_payment_path(params[:event_id], @payment), class: "payment_btn", data: { turbo: false } %>
+  </div>
+  <div class="payment_wrapper">
+    <div class="payment_amount_show">
+      <p>総額</p>
+      <p><%= number_to_currency(@payment.amount, unit: "￥", format: "%u %n") %></p>
+    </div>
+    <div class="payment_table_show">
+      <table>
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>支払額</th>
+            <th>支払済</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @participant.each do |payment| %>
+            <tr>
+              <td>
+                <%= payment.participant %>
+              </td>
+              <td>
+                <%= number_to_currency(payment.fee, unit: "￥", format: "%u %n") %>
+              </td>
+              <td>
+                <%= content_tag(:i, nil, class: "fa-solid fa-check") if payment.is_paid %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
