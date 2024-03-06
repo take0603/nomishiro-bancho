@@ -11,6 +11,6 @@ class Attendance < ApplicationRecord
   def self.create_related_attendance(schedule)
     event = Event.find(schedule.event.id)
     members = event.members.distinct
-    members.map { |member| self.create(event_id: event.id, schedule_id: schedule.id, member_id: member.id) }
+    members.map { |member| create(event_id: event.id, schedule_id: schedule.id, member_id: member.id) }
   end
 end

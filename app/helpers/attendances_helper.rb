@@ -3,13 +3,11 @@ module AttendancesHelper
     ans = Attendance.find_by(member_id: member.id, schedule_id: schedule.id).answer
     case ans
     when "ok"
-      content_tag(:i, nil, class: "fa-regular fa-circle")
+      tag.i class: "fa-regular fa-circle"
     when "maybe"
-      content_tag(:i, nil, class: "fa-solid fa-play fa-rotate-270")
+      tag.i class: "fa-solid fa-play fa-rotate-270"
     when "ng"
-      content_tag(:i, nil, class: "fa-solid fa-xmark")
-    else
-      return
+      tag.i class: "fa-solid fa-xmark"
     end
   end
 

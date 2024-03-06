@@ -6,7 +6,7 @@ RSpec.describe "Users::RegistrationsControllers", type: :request do
 
     it "削除対象がゲストユーザーの場合、削除ができないこと" do
       sign_in user
-      expect{ delete user_registration_path }.not_to change{ User.count }
+      expect { delete user_registration_path }.not_to change { User.count }
     end
 
     it "トップページに遷移すること" do

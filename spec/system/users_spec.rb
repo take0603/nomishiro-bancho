@@ -16,10 +16,9 @@ RSpec.describe "Users", type: :system do
         fill_in "メールアドレス", with: "user@example.com"
         fill_in "パスワード", with: "password"
         fill_in "確認用パスワード", with: "password"
-        expect{ click_on "ユーザー登録" }.to change{ User.count }.by(1)
+        expect { click_on "ユーザー登録" }.to change { User.count }.by(1)
         expect(page).to have_content("アカウント登録が完了しました。")
         expect(page).to have_current_path(root_path)
-        
       end
     end
 
@@ -124,7 +123,7 @@ RSpec.describe "Users", type: :system do
 
     it "編集ボタン押下で編集ページへ遷移すること" do
       click_on "編集"
-      expect(current_path).to eq(edit_user_registration_path) 
+      expect(current_path).to eq(edit_user_registration_path)
     end
   end
 

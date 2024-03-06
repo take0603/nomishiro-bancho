@@ -42,7 +42,9 @@ class AttendancesController < ApplicationController
   end
 
   private
+
   def member_params
-    params.require(:member).permit(:id, :member_name, attendances_attributes: [:id, :event_id, :schedule_id, :answer])
+    params.require(:member).permit(:id, :member_name,
+                                   attendances_attributes: [:id, :event_id, :schedule_id, :answer])
   end
 end

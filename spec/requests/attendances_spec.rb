@@ -60,21 +60,23 @@ RSpec.describe "Attendances", type: :request do
     let(:user) { create(:user) }
     let(:event) { create(:event, user: user) }
     let(:schedule) { create(:schedule, event: event) }
-    let(:valid_params) { { member: { member_name: 'テストメンバー', attendances_attributes: { "0": { event_id: event.id, schedule_id: schedule.id, answer: "ok" } } } } }
+    let(:valid_params) do
+      { member: { member_name: 'テストメンバー', attendances_attributes: { "0": { event_id: event.id, schedule_id: schedule.id, answer: "ok" } } } }
+    end
     let(:invalid_params) { { member: { member_name: '' } } }
 
     context "有効なパラメータの場合" do
       it "回答者のレコードを作成すること" do
-        expect{ post event_attendances_path(event), params: valid_params }.to change{ Member.count }.by(1)
+        expect { post event_attendances_path(event), params: valid_params }.to change { Member.count }.by(1)
       end
 
       it "ネストしたパラメータから回答者に紐付く回答内容のレコードを作成すること" do
-        expect{ post event_attendances_path(event), params: valid_params }.to change{ Attendance.count }.by(1)
+        expect { post event_attendances_path(event), params: valid_params }.to change { Attendance.count }.by(1)
         expect(Member.last.attendances).to include(Attendance.last)
       end
 
       it "出欠表ページへ遷移すること" do
-        post event_attendances_path(event), params: valid_params 
+        post event_attendances_path(event), params: valid_params
         expect(response).to redirect_to(event_attendances_path)
       end
     end
@@ -93,7 +95,9 @@ RSpec.describe "Attendances", type: :request do
     let!(:schedule) { create(:schedule, event: event) }
     let!(:member) { create(:member) }
     let!(:attendance) { create(:attendance, event: event, schedule: schedule, member: member) }
-    let(:valid_params) { { member: { id: member.id, member_name: '更新するテストメンバー名', attendances_attributes: { "0": { id: attendance.id, answer: "ng" } } } } }
+    let(:valid_params) do
+      { member: { id: member.id, member_name: '更新するテストメンバー名', attendances_attributes: { "0": { id: attendance.id, answer: "ng" } } } }
+    end
     let(:invalid_params) { { member: { id: member.id, member_name: '' } } }
 
     context "有効なパラメータの場合" do

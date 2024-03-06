@@ -32,8 +32,10 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     if @event.update(event_params)
-      # Schedule新規追加時、既存メンバー分のAttendanceレコードをデフォルト値で作成する
-      @event.schedules.map { |schedule| Attendance.create_related_attendance(schedule) if @event.members.present? && schedule.members.blank? }
+      # schedule追加時、出欠表で既存メンバー分の当該日を未回答とするため回答のレコードを作成する
+      if @event.members.present? && @event.schedules.where.missing(:members)
+        @event.schedules.where.missing(:members).map { |schedule| Attendance.create_related_attendance(schedule) }
+      end
       flash[:notice] = "イベント情報が更新されました。"
       redirect_to event_path(@event)
     else
@@ -49,8 +51,10 @@ class EventsController < ApplicationController
   end
 
   private
+
   def event_params
-    params.require(:event).permit(:id, :user_id, :event_name, :explanation, :date, :deadline,  schedules_attributes: [:id, :event_id, :schedule_date, :_destroy])
+    params.require(:event).permit(:id, :user_id, :event_name, :explanation, :date, :deadline,
+                                  schedules_attributes: [:id, :event_id, :schedule_date, :_destroy])
   end
 
   def correct_user

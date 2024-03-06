@@ -54,8 +54,10 @@ class PaymentsController < ApplicationController
   end
 
   private
+
   def payment_params
-    params.require(:payment).permit(:id, :event_id, :payment_name, :amount, payment_details_attributes: [:id, :payment_id, :participant, :fee, :is_paid, :_destroy])
+    params.require(:payment).permit(:id, :event_id, :payment_name, :amount,
+                                    payment_details_attributes: [:id, :payment_id, :participant, :fee, :is_paid, :_destroy])
   end
 
   def correct_user

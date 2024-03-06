@@ -36,7 +36,7 @@ RSpec.describe "Payments", type: :system do
 
     it "削除ボタン押下で対象のinputのdestory属性を追加すること" do
       find("button.deleteButton i").click
-      expect(page).to have_selector("input[name='payment[payment_details_attributes][0][_destroy]'][value='true']" , visible: false)
+      expect(page).to have_selector("input[name='payment[payment_details_attributes][0][_destroy]'][value='true']", visible: false)
     end
 
     it "戻るボタン押下で前のページに戻ること" do
@@ -175,7 +175,7 @@ RSpec.describe "Payments", type: :system do
       expect(page).to have_field("総額", with: payment.amount)
       expect(page).to have_field("payment[payment_details_attributes][0][participant]", with: payment_detail1.participant)
       expect(page).to have_field("payment[payment_details_attributes][0][fee]", with: payment_detail1.fee)
-      expect(page).to have_field("payment[payment_details_attributes][1][participant]", with: payment_detail2.participant)      
+      expect(page).to have_field("payment[payment_details_attributes][1][participant]", with: payment_detail2.participant)
       expect(page).to have_field("payment[payment_details_attributes][1][fee]", with: payment_detail2.fee)
     end
 
@@ -195,7 +195,7 @@ RSpec.describe "Payments", type: :system do
 
     it "削除ボタン押下で対象のinputのdestory属性を追加すること" do
       find("button.deleteButton i", match: :first).click
-      expect(page).to have_selector("input[name='payment[payment_details_attributes][0][_destroy]'][value='true']" , visible: false)
+      expect(page).to have_selector("input[name='payment[payment_details_attributes][0][_destroy]'][value='true']", visible: false)
     end
 
     it "戻るボタン押下で前のページに戻ること" do

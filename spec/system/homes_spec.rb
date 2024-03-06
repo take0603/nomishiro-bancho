@@ -30,10 +30,10 @@ RSpec.describe "Homes", type: :system do
 
   describe "マイページ" do
     let(:user) { create(:user) }
-    let!(:event) { create(:event, date: nil , user: user) }
-    let!(:event_before_date) { create(:event, user: user ) }
-    let!(:event_before_payment1) { create(:event, date: Time.now.ago(1.days), user: user ) }
-    let!(:event_before_payment2) { create(:event, date: Time.now.ago(1.days), user: user ) }
+    let!(:event) { create(:event, date: nil, user: user) }
+    let!(:event_before_date) { create(:event, user: user) }
+    let!(:event_before_payment1) { create(:event, date: Time.now.ago(1.days), user: user) }
+    let!(:event_before_payment2) { create(:event, date: Time.now.ago(1.days), user: user) }
     let!(:payment) { create(:payment, event: event_before_payment2) }
     let!(:payment_details) { create(:payment_detail, payment: payment) }
 

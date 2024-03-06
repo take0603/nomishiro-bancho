@@ -26,7 +26,7 @@ RSpec.describe "Events", type: :system do
 
     it "削除ボタン押下で対象のinputのdestory属性を追加すること" do
       find(".deleteScheduleForm i").click
-      expect(page).to have_selector("input[name='event[schedules_attributes][0][_destroy]'][value='true']" , visible: false)
+      expect(page).to have_selector("input[name='event[schedules_attributes][0][_destroy]'][value='true']", visible: false)
     end
 
     it "戻るボタン押下で前のページに戻ること" do
@@ -91,7 +91,7 @@ RSpec.describe "Events", type: :system do
 
     it "削除ボタン押下で対象のinputのdestory属性を追加すること" do
       find(".deleteScheduleForm i").click
-      expect(page).to have_selector("input[name='event[schedules_attributes][0][_destroy]'][value='true']" , visible: false)
+      expect(page).to have_selector("input[name='event[schedules_attributes][0][_destroy]'][value='true']", visible: false)
     end
 
     it "戻るボタン押下で前のページに戻ること" do

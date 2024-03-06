@@ -17,7 +17,7 @@ RSpec.describe "Attendances" do
 
     it "回答欄のアイコンを押下でinput要素のチェックが入ること", js: true do
       find(".answer_icon i.fa-circle").click
-      expect(page).to have_checked_field("member_attendances_attributes_0_answer_ok", visible:false)
+      expect(page).to have_checked_field("member_attendances_attributes_0_answer_ok", visible: false)
     end
 
     it "戻るボタン押下で前のページに戻ること" do
@@ -26,7 +26,7 @@ RSpec.describe "Attendances" do
     end
 
     context "有効な値の場合" do
-      it "回答を登録し、詳細画面へ遷移すること", js: true  do
+      it "回答を登録し、詳細画面へ遷移すること", js: true do
         fill_in "名前", with: "テストメンバー"
         find(".answer_icon i.fa-circle").click
         click_on "回答"
@@ -49,7 +49,7 @@ RSpec.describe "Attendances" do
     end
   end
 
-  describe "出欠回答編集", type: :system  do
+  describe "出欠回答編集", type: :system do
     let(:user) { create(:user) }
     let(:event) { create(:event, user: user) }
     let(:schedule) { create(:schedule, event: event) }
@@ -64,13 +64,13 @@ RSpec.describe "Attendances" do
     it "候補日の表示と回答情報を表示すること", js: true  do
       expect(page).to have_field("名前", with: member.member_name)
       expect(page).to have_content(schedule.schedule_date.strftime("%Y年%-m月%-d日 %H時%M分"))
-      expect(page).to have_checked_field("member_attendances_attributes_0_answer_ok", visible:false)
+      expect(page).to have_checked_field("member_attendances_attributes_0_answer_ok", visible: false)
     end
 
     it "既存の回答と別の回答アイコンを押下でinput要素のチェックが切り替わること", js: true do
       find(".answer_icon i.fa-xmark").click
-      expect(page).to have_checked_field("member_attendances_attributes_0_answer_ng", visible:false)
-      expect(page).not_to have_checked_field("member_attendances_attributes_0_answer_ok", visible:false)
+      expect(page).to have_checked_field("member_attendances_attributes_0_answer_ng", visible: false)
+      expect(page).not_to have_checked_field("member_attendances_attributes_0_answer_ok", visible: false)
     end
 
     it "戻るボタン押下で前のページに戻ること" do

@@ -4,13 +4,13 @@ shared_examples "ログイン時のレスポンス確認" do
   it "ステータスコード200を返すこと" do
     expect(response).to have_http_status(200)
   end
-end 
+end
 shared_examples "非ログイン時のレスポンス確認" do
   it "ステータスコード302を返し、ログインページへ遷移すること" do
     expect(response).to have_http_status(302)
     expect(response).to redirect_to(new_user_session_path)
   end
-end 
+end
 
 RSpec.describe "Events", type: :request do
   describe "GET #index" do
@@ -28,10 +28,10 @@ RSpec.describe "Events", type: :request do
       it_behaves_like "ログイン時のレスポンス確認"
 
       it "ログインユーザーに紐付くイベントを取得し返すこと" do
-        expect(response.body).to include(event1.event_name) 
+        expect(response.body).to include(event1.event_name)
       end
     end
-    
+
     context "ユーザーが非ログイン状態の場合" do
       before { get events_path }
       it_behaves_like "非ログイン時のレスポンス確認"
@@ -120,8 +120,10 @@ RSpec.describe "Events", type: :request do
 
   describe "POST #create" do
     let!(:user) { create(:user) }
-    let(:valid_params) { { event: { event_name: 'テストイベント', user: user.id, schedules_attributes: { "0": { schedule_date: Time.current } } } } }
-    let(:invalid_params) { { event: { event_name: ''} } } 
+    let(:valid_params) do
+      { event: { event_name: 'テストイベント', user: user.id, schedules_attributes: { "0": { schedule_date: Time.current } } } }
+    end
+    let(:invalid_params) { { event: { event_name: '' } } }
 
     context "ユーザーがログイン状態の場合" do
       context "有効なパラメータの場合" do
@@ -130,11 +132,11 @@ RSpec.describe "Events", type: :request do
         end
 
         it "イベントのレコードを作成すること" do
-          expect{ post events_path, params: valid_params }.to change{ Event.count }.by(1)
+          expect { post events_path, params: valid_params }.to change { Event.count }.by(1)
         end
 
         it "ネストしたパラメータからイベントに紐付く候補日のレコードを作成すること" do
-          expect{ post events_path, params: valid_params }.to change{ Schedule.count }.by(1)
+          expect { post events_path, params: valid_params }.to change { Schedule.count }.by(1)
           expect(Event.last.schedules).to include(Schedule.last)
         end
 
@@ -164,8 +166,10 @@ RSpec.describe "Events", type: :request do
     let!(:user2) { create(:user) }
     let!(:event) { create(:event, user: user1) }
     let!(:schedule) { create(:schedule, event: event) }
-    let(:valid_params) { { event: { id: event.id, event_name: '更新するイベント名', schedules_attributes: { "0": { id: schedule.id, schedule_date: Time.current } } } } }
-    let(:invalid_params) { { event: { event_name: ''} } } 
+    let(:valid_params) do
+      { event: { id: event.id, event_name: '更新するイベント名', schedules_attributes: { "0": { id: schedule.id, schedule_date: Time.current } } } }
+    end
+    let(:invalid_params) { { event: { event_name: '' } } }
 
     context "ユーザーがログイン状態の場合" do
       context "有効なパラメータの場合" do
@@ -227,7 +231,7 @@ RSpec.describe "Events", type: :request do
       end
 
       it "イベントのレコードを削除すること" do
-        expect{ delete event_path(event) }.to change{ Event.count }.by(-1)
+        expect { delete event_path(event) }.to change { Event.count }.by(-1)
       end
 
       it "イベント一覧画面に遷移すること" do
