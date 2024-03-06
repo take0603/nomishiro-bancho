@@ -5,14 +5,14 @@
     <h2>支払表作成</h2>
     <%= form_with model: @payment, url: event_payments_path, data: { turbo: false } do |f| %>
       <div class="row mb-3">
-        <%= f.label :payment_name, "支払表名", class: "col-sm-4 col-form-label" %>
+        <%= f.label :payment_name, "支払表名", class: "col-sm-4 col-form-label required" %>
         <div class="col-sm-8">
           <%= f.text_field :payment_name, placeholder: "例：◯◯代金", class: "form-control" %>
           <%= render "shared/error_messages", object: f.object, key: "payment_name" %>
         </div>
       </div>
       <div class="row mb-3">
-        <%= f.label :amount, "総額", class: "col-sm-4 col-form-label" %>
+        <%= f.label :amount, "総額", class: "col-sm-4 col-form-label required" %>
         <div class="col-sm-8">
           <%= f.number_field :amount, class: "form-control" %>
           <%= render "shared/error_messages", object: f.object, key: "amount" %>

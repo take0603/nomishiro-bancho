@@ -207,3 +207,14 @@ footer p {
 .back i {
   margin-right: 5px;
 }
+
+// 入力必須フォーム
+.required:after {
+  content: "必須";
+  color: #ffffff;
+  background: #f0ad4e;
+  font-size: 0.8em;
+  padding: 0.3em;
+  border-radius: 0.5em;
+  margin-left: 1em;
+}

@@ -3,7 +3,7 @@
     <h2>出欠の編集</h2>
     <%= form_with model: @member, url: event_attendances_path(@event, member_id: @member) do |f| %>
       <div class="name_form">
-        <%= f.label :member_name, "名前" %>
+        <%= f.label :member_name, "名前", class: "required" %>
         <%= f.text_field :member_name, class: "form-control" %>
       </div>
       <%= render "shared/error_messages", object: f.object, key: "member_name" %>
