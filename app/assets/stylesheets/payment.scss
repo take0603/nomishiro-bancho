@@ -8,6 +8,12 @@
   border-radius: 15px;
 }
 
+@media screen and (max-width: 576px) {
+  .payment_wrapper {
+    padding: 40px 10px;
+  }
+}
+
 .payment_wrapper h2 {
   text-align: center;
   margin-bottom: 40px;
@@ -94,6 +100,7 @@
   border: none;
   background: transparent;
   transition: 0.1s;
+  color: #000;
 }
 
 #addButton:hover {
