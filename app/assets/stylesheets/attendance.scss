@@ -112,6 +112,26 @@
   opacity: 0.6;
 }
 
+.attendance_options_area {
+  display: flex;
+  justify-content: space-between;
+}
+
+.attendance_delete_btn {
+  color: #000;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.attendance_delete_btn:hover {
+  opacity: 0.6;
+}
+
+.attendance_delete_btn i {
+  margin-right: 5px;
+
+}
+
 // show
 .attendance_title {
   border-bottom: 1px solid #dee2e6;

@@ -78,7 +78,7 @@ https://nomishiro-bancho-2b23287ae884.herokuapp.com
 | 出欠表 |  |
 | --- | --- |
 | ![出欠回答画面](https://github.com/take0603/nomishiro-bancho/blob/images/attendance_new.png) | ![　出欠表表示画面](https://github.com/take0603/nomishiro-bancho/blob/images/attendance_show.png) |
-| URLを回答者に案内しアプリ上で回答をもらう<br>出欠表関連はログイン不要 | 全員の候補日ごとの回答一覧表示<br>回答登録・変更 |
+| URLを回答者に案内しアプリ上で回答をもらう<br>出欠表関連はログイン不要 | 全員の候補日ごとの回答一覧表示<br>回答登録・変更・削除 |
 
 | 支払表 |  |
 | --- | --- |

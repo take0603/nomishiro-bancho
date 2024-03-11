@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/mypage', to: 'home#mypage'
   get '/users/account', to: 'users#show'
   resources :events do
-    resource :attendances, only: [:show, :new, :create, :edit, :update]
+    resource :attendances, only: [:show, :new, :create, :edit, :update, :destroy]
     resources :payments
   end
 
