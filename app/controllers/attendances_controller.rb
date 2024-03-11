@@ -41,6 +41,13 @@ class AttendancesController < ApplicationController
     end
   end
 
+  def destroy
+    @member = Member.find(params[:member_id])
+    @member.destroy
+    flash[:notice] = "回答が削除されました。"
+    redirect_to event_attendances_path
+  end
+
   private
 
   def member_params

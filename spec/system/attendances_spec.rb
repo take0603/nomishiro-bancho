@@ -179,4 +179,20 @@ RSpec.describe "Attendances" do
       end
     end
   end
+
+  describe "出欠回答削除", js: true do
+    let(:user) { create(:user) }
+    let(:event) { create(:event, user: user) }
+    let(:schedule) { create(:schedule, event: event) }
+    let(:member) { create(:member) }
+    let!(:attendance) { create(:attendance, answer: "ok", event: event, schedule: schedule, member: member) }
+
+    it "削除ボタン押下で支払表を削除すること" do
+      visit event_attendances_path(event)
+      click_on member.member_name
+      click_on "削除"
+      page.accept_confirm
+      expect(page).to have_content("回答が削除されました。")
+    end
+  end
 end

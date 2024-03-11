@@ -32,8 +32,13 @@
       </ul>
       <%= f.submit "回答", class: "attendance_form_button" %>
     <% end %>
-    <%= link_to :back, class: "back" do %>
-      <i class="fa-solid fa-chevron-left fa-lg"></i>戻る
-    <% end %>
+    <div class="attendance_options_area">
+      <%= link_to :back, class: "back" do %>
+        <i class="fa-solid fa-chevron-left fa-lg"></i>戻る
+      <% end %>
+      <%= link_to event_attendances_path(params[:event_id], member_id: @member.id), data: { turbo_method: :delete, turbo_confirm: "登録した回答を削除しますか？" }, class: "attendance_delete_btn" do %>
+        <i class="fa-solid fa-trash" style="color: #757070;"></i>削除
+      <% end %>
+    </div>
   </div>
 </div>

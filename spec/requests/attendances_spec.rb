@@ -125,4 +125,21 @@ RSpec.describe "Attendances", type: :request do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    let(:user) { create(:user) }
+    let(:event) { create(:event, user: user) }
+    let(:schedule) { create(:schedule, event: event) }
+    let(:member) { create(:member) }
+    let!(:attendance) { create(:attendance, event: event, schedule: schedule, member: member) }
+
+    it "対象のメンバーを削除すること" do
+      expect { delete event_attendances_path(event, member_id: member.id) }.to change { Member.count }.by(-1)
+    end
+
+    it "当該出欠表の詳細画面に遷移すること" do
+      delete event_attendances_path(event, member_id: member.id)
+      expect(response).to redirect_to(event_attendances_path(event))
+    end
+  end
 end
