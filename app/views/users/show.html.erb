@@ -12,6 +12,14 @@
         <%= @user.name %>
       </div>
       <div class="account_column">
+      <p>ユーザーアイコン</p>
+        <% if @user.image.attached? %>
+          <div><%= image_tag @user.image.variant(resize_to_fill: [80, 80]), class: "user_image" %></div>
+        <% else %>
+          <div><%= image_tag "user-icon.png", class: "user_image_default" %></div>
+        <% end %>
+      </div>
+      <div class="account_column">
         <p>メールアドレス</p>
         <%= @user.email %>
       </div>
