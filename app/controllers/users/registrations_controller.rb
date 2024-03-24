@@ -6,4 +6,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to root_path, alert: 'ゲストユーザーのためアカウントを削除できません。'
     end
   end
+
+  def update
+    super
+    if account_update_params[:image].present?
+      resource.image.attach(account_update_params[:image])
+    end
+  end
 end
