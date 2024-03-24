@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     super
     if account_update_params[:image].present?
-      resource.image.attach(account_update_params[:image])    
+      resource.image.attach(account_update_params[:image])
     end
   end
 end

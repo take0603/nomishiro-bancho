@@ -19,7 +19,7 @@ class User < ApplicationRecord
   end
 
   def image_content_type
-    if image.attached? && !image.content_type.in?(%w[image/jpeg image/png image/gif])
+    if image.attached? && !image.content_type.in?(%w(image/jpeg image/png image/gif))
       errors.add(:image, ':ファイル形式が、JPEG, PNG, GIF以外になってます。ファイル形式をご確認ください。')
     end
   end

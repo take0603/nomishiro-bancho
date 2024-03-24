@@ -1,6 +1,6 @@
 FROM ruby:3.2.2
 
-RUN apt-get update -qq && apt-get install -y postgresql-client nodejs graphviz libvips
+RUN apt-get update -qq && apt-get install -y postgresql-client nodejs graphviz libvips vim
 RUN mkdir /nomishiro_bancho
 WORKDIR /nomishiro_bancho
 COPY Gemfile /nomishiro_bancho/Gemfile
