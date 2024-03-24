@@ -7,7 +7,7 @@ RSpec.describe "Users", type: :system do
     it "ゲストログインボタン押下でゲストログインし、トップページへリダイレクトすること" do
       click_on "ゲストとしてお試しログイン"
       expect(page).to have_content("ゲストユーザーとしてログインしました。")
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(mypage_path)
     end
 
     context "有効な値の場合" do
@@ -18,7 +18,7 @@ RSpec.describe "Users", type: :system do
         fill_in "確認用パスワード", with: "password"
         expect { click_on "ユーザー登録" }.to change { User.count }.by(1)
         expect(page).to have_content("アカウント登録が完了しました。")
-        expect(page).to have_current_path(root_path)
+        expect(page).to have_current_path(mypage_path)
       end
     end
 
@@ -41,7 +41,7 @@ RSpec.describe "Users", type: :system do
     it "ゲストログインボタン押下でゲストログインし、トップページへリダイレクトすること" do
       click_on "ゲストとしてお試しログイン"
       expect(page).to have_content("ゲストユーザーとしてログインしました。")
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(mypage_path)
     end
 
     context "有効な値の場合" do
@@ -52,7 +52,7 @@ RSpec.describe "Users", type: :system do
           click_on "ログイン"
         end
         expect(page).to have_content("ログインしました。")
-        expect(page).to have_current_path(root_path)
+        expect(page).to have_current_path(mypage_path)
       end
 
       it "ログイン後、ヘッダーメニューが正しく表示されること" do
@@ -83,7 +83,7 @@ RSpec.describe "Users", type: :system do
         click_on "ゲストログイン"
       end
       expect(page).to have_content("ゲストユーザーとしてログインしました。")
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(mypage_path)
     end
   end
 

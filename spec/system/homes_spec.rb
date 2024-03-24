@@ -18,7 +18,7 @@ RSpec.describe "Homes", type: :system do
         click_on "ゲストログイン"
       end
       expect(page).to have_content("ゲストユーザーとしてログインしました。")
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(mypage_path)
     end
 
     it "ヘッダーロゴ押下でトップページへ遷移すること" do

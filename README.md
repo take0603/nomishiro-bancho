@@ -44,7 +44,7 @@ https://nomishiro-bancho-2b23287ae884.herokuapp.com
 | --- | --- |
 | フロントエンド | HTML, CSS, JavaScript, Bootstrap |
 | バックエンド | Ruby, Ruby on Rails |
-| インフラ | Heroku |
+| インフラ | Heroku, AWS(S3による外部ストレージ) |
 | DB | PostgreSQL |
 | 環境構築 | Docker, Docker Compose |
 | テスト | RuboCop<br>RSpec<br>- 単体テスト(model, Helper)<br>- 機能テスト(request)<br>- 統合テスト(system)
