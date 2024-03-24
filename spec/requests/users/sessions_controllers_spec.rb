@@ -11,7 +11,7 @@ RSpec.describe "Users::SessionsControllers", type: :request do
 
     it "トップページに遷移すること" do
       post users_guest_sign_in_path
-      expect(response.body).to redirect_to(root_path)
+      expect(response.body).to redirect_to(mypage_path)
     end
   end
 end
